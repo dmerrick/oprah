@@ -13,7 +13,7 @@ get '/hits' do
   content_type "text/plain"
 
   Hit.all.map do |hit|
-    hit.ip + ", " + hit.url + ", " + hit.created_at
+    hit.ip + ", " + hit.url + ", " + hit.created_at.inspect
   end.join(",\n")
 
 end
@@ -25,7 +25,10 @@ get '/?*' do
   url = params[:splat].first
   url = "(blank)" if url.blank?
 
-  Hit.new(:ip => ip, :url => url).save
+  # there must be a better way to do this
+  unless url == "favicon.ico"
+    Hit.new(:ip => ip, :url => url).save
+  end
 
   ip
 end
