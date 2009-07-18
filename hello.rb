@@ -4,11 +4,14 @@ require 'rubygems'
   require 'dm-timestamps'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://my.db')
+#DataMapper.auto_upgrade!
+
+set :root, File.dirname(__FILE__)
+disable :static
 
 get '/hits' do
   Hit.all.each do |hit|
-    hit.ip
-    hit.url
+    hit.ip + hit.url
   end
 end
 
