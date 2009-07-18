@@ -18,7 +18,7 @@ get '/hits' do
     [hit.ip, hit.url, hit.created_at.strftime]
   end
 
-  report = ""
+  report = StringIO.new
   CSV::Writer.generate(report, ',') do |csv|
     csv << ['IP','URL','DATE']
     data.each do |d|
@@ -26,6 +26,8 @@ get '/hits' do
     end
   end
 
+  report.rewind
+  report.readlines
 end
 
 get '/?*' do
