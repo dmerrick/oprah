@@ -19,10 +19,10 @@ get '/hits' do
   end
 
   report = StringIO.new
-  CSV::Writer.generate(report, ',') do |hits|
-    title << ['IP','URL','DATE']
+  CSV::Writer.generate(report, ',') do |csv|
+    csv << ['IP','URL','DATE']
     data.each do |d|
-      title << d
+      csv << d
     end
   end
 
