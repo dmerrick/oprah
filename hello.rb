@@ -13,8 +13,9 @@ get '/hits' do
   content_type "text/plain"
 
   Hit.all.map do |hit|
-    hit.ip + ", " + hit.url
+    hit.ip + ", " + hit.url + ", " + hit.created_at
   end.join(",\n")
+
 end
 
 get '/?*' do
