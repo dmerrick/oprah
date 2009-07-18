@@ -12,7 +12,7 @@ set :root, File.dirname(__FILE__)
 disable :static
 
 get '/hits' do
-  content_type "text/plain"
+  content_type "text/csv"
 
   data = Hit.all.map do |hit|
     [hit.ip, hit.url, hit.created_at.strftime]
