@@ -3,6 +3,8 @@ require 'rubygems'
   require 'dm-core'
   require 'dm-timestamps'
 
+require 'csv'
+
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://my.db')
 #DataMapper.auto_upgrade!
 
