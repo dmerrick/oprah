@@ -11,15 +11,18 @@ disable :static
 
 get '/hits' do
   Hit.all.map do |hit|
-    hit.ip + hit.url
-  end.join(", ")
+    hit.ip + ", " + hit.url
+  end.join(",\n")
 end
 
-get '/:url' do
+get '/?*' do
   content_type "text/plain"
 
   ip = request.env['REMOTE_ADDR'].split(",").first
-  Hit.new(:ip => ip, :url => params[:url]).save
+  url = params[:splat].first
+  url = "(blank)" if url.blank?
+
+  Hit.new(:ip => ip, :url => url).save
 
   ip
 end
