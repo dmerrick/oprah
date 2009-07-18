@@ -1,5 +1,6 @@
 require 'rubygems'
   require 'sinatra'
+  require 'dm-core'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://my.db')
 
