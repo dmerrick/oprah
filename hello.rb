@@ -26,8 +26,8 @@ class Hit
 
   property :id, Serial
 
-  propery :url, String
-  propery :ip, String
+  property :url, String
+  property :ip, String
 
   property :created_at, DateTime
 
