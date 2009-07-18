@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 Sinatra::Application.default_options.merge!(
-  :run => false,
+  :run => false
 )
 
 require 'hello'
