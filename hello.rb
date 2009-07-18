@@ -10,6 +10,8 @@ set :root, File.dirname(__FILE__)
 disable :static
 
 get '/hits' do
+  content_type "text/plain"
+
   Hit.all.map do |hit|
     hit.ip + ", " + hit.url
   end.join(",\n")
