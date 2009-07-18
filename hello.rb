@@ -12,9 +12,19 @@ disable :static
 get '/hits' do
   content_type "text/plain"
 
-  Hit.all.map do |hit|
-    hit.ip + ", " + hit.url + ", " + hit.created_at.inspect
-  end.join(",\n")
+  data = Hit.all.map do |hit|
+    [hit.ip, hit.url, hit.created_at.strftime]
+  end
+
+  report = StringIO.new
+  CSV::Writer.generate(report, ',') do |hits|
+    title << ['IP','URL','DATE']
+    data.each do |d|
+      title << d
+    end
+  end
+
+  report
 
 end
 
