@@ -10,9 +10,9 @@ set :root, File.dirname(__FILE__)
 disable :static
 
 get '/hits' do
-  Hit.all.each do |hit|
+  Hit.all.map do |hit|
     hit.ip + hit.url
-  end
+  end.join(", ")
 end
 
 get '/:url' do
