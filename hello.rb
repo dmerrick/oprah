@@ -18,15 +18,13 @@ get '/hits' do
     [hit.ip, hit.url, hit.created_at.strftime]
   end
 
-  report = StringIO.new
+  report = ""
   CSV::Writer.generate(report, ',') do |csv|
     csv << ['IP','URL','DATE']
     data.each do |d|
       csv << d
     end
   end
-
-  report
 
 end
 
