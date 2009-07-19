@@ -33,6 +33,14 @@ get '/hits' do
   redirect '/hits.csv'
 end
 
+# delete a hit with a given timestamp
+get '/hit/:date' do
+  date = DateTime.parse(params[:date]) rescue pass
+
+  hit = Hit.all(:created_at => date)
+  hit.destroy!
+end
+
 # auto-generate hits file
 get '/hits.csv' do
   content_type "text/csv"
