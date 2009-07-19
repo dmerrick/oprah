@@ -7,13 +7,17 @@ require 'rubygems'
   require 'dm-core'
   require 'dm-timestamps'
 
+require 'models/hit'
+
 # set up Sinatra
 configure do
+  set :root, File.dirname(__FILE__)
+  disable :static
+
   DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:development.db')
   DataMapper.auto_upgrade!
 
-  set :root, File.dirname(__FILE__)
-  disable :static
+  Hit.auto_upgrade!
 end
 
 # show the environment information
@@ -65,17 +69,3 @@ get '/?*' do
 
   ip
 end
-
-class Hit
-  include DataMapper::Resource
-
-  property :id, Serial
-
-  property :url, String
-  property :ip, String
-
-  property :created_at, DateTime
-
-end
-
-Hit.auto_upgrade!
