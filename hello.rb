@@ -38,7 +38,10 @@ get '/up/:host' do
 
   record_hit
 
-  Net::PingExternal.new(params[:host]).ping.to_s
+  [Net::PingUDP.new(params[:host]).ping.to_s, 
+  Net::PingTCP.new(params[:host]).ping.to_s, 
+  Net::PingHTTP.new(params[:host]).ping.to_s, 
+  Net::PingExternal.new(params[:host]).ping.to_s]
 end
 
 # show the environment information
