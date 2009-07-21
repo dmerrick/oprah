@@ -1,11 +1,13 @@
 #!/usr/bin/env ruby
 
 require 'csv'
+require 'pp'
 
 require 'rubygems'
   require 'sinatra'
   require 'dm-core'
   require 'dm-timestamps'
+  require 'net/ping'
 
 require 'models/hit'
 
@@ -34,7 +36,6 @@ end
 get '/up/:host' do
   record_hit
 
-  require 'net/ping'
   Net::PingExternal.new(params[:host]).ping.to_s
 end
 
@@ -44,7 +45,6 @@ get '/env' do
 
   record_hit
 
-  require 'pp'
   # DATABASE_URL contains database login info
   ENV.reject {|k,v| k=="DATABASE_URL"}.pretty_inspect
 end
