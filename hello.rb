@@ -34,6 +34,8 @@ helpers do
 end
 
 get '/up/:host' do
+  content_type 'text/plain'
+
   record_hit
 
   Net::PingExternal.new(params[:host]).ping.to_s
