@@ -7,7 +7,6 @@ require 'rubygems'
   require 'sinatra'
   require 'dm-core'
   require 'dm-timestamps'
-  require 'net/ping'
 
 require 'models/hit'
 
@@ -35,14 +34,6 @@ end
 
 # bring in the xkcd feed route
 require 'xkcd_feed'
-
-get '/up/:host' do
-  content_type 'text/plain'
-
-  record_hit
-
-  Net::PingExternal.new(params[:host]).ping.to_s
-end
 
 # show the environment information
 get '/env' do
