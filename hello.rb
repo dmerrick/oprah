@@ -33,6 +33,9 @@ helpers do
   end
 end
 
+# bring in the xkcd feed route
+require 'xkcd_feed'
+
 get '/up/:host' do
   content_type 'text/plain'
 
