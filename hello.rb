@@ -20,9 +20,30 @@ configure do
   Hit.auto_upgrade!
 end
 
+helpers do
+  def record_hit
+    ip = request.env['REMOTE_ADDR'].split(",").first
+    url = request.path_info || "(blank)"
+
+    Hit.new(:ip => ip, :url => url).save
+    
+    return ip
+  end
+end
+
+get '/up/:host' do
+  record_hit
+
+  require 'net/ping'
+  Net::PingExternal.new(params[:host]).ping.to_s
+end
+
 # show the environment information
 get '/env' do
   content_type 'text/plain'
+
+  record_hit
+
   require 'pp'
   # DATABASE_URL contains database login info
   ENV.reject {|k,v| k=="DATABASE_URL"}.pretty_inspect
@@ -30,6 +51,7 @@ end
 
 # alias for the hits file
 get '/hits' do
+  record_hit
   redirect '/hits.csv'
 end
 
@@ -70,10 +92,5 @@ end
 get '/?*' do
   content_type "text/plain"
 
-  ip = request.env['REMOTE_ADDR'].split(",").first
-  url = params[:splat].first || "(blank)"
-
-  Hit.new(:ip => ip, :url => url).save
-
-  ip
+  record_hit
 end
