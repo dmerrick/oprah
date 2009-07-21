@@ -2,9 +2,7 @@
 
 require 'hello'
 
-Sinatra::Application.default_options.merge!(
-  :run => false
-)
+disable :run
 
 run Sinatra::Application
 
