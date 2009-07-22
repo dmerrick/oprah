@@ -32,8 +32,9 @@ helpers do
   end
 end
 
-# bring in the xkcd feed route
+# bring in external routes
 require 'xkcd_feed'
+require 'torrents'
 
 # show the environment information
 get '/env' do
