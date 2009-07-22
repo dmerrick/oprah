@@ -1,2 +1,2 @@
+http://xkcd.com/rss.xml
 http://twitter.com/statuses/user_timeline/6445722.rss
-http://ip.oprahsguild.com/xkcd.rss
