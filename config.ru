@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'hello'
+require 'app'
 
 disable :run
 
