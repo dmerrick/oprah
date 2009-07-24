@@ -35,6 +35,7 @@ end
 # bring in external routes
 require 'xkcd_feed'
 require 'torrents'
+require 'realm_status'
 
 # show the environment information
 get '/env' do
